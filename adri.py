@@ -4,6 +4,7 @@ from telegram.ext import *
 
 import keys
 
+triggers = ["?" , "??" , "???"] 
 print('Starting up bot...')
 
 
@@ -25,8 +26,8 @@ def custom_command(update, context):
 def handle_response(text) -> str:
     # Create your own response logic
 
-    if text == "?" or text == "�" or text == "??" or text == "???":
-        return 'Adria, no sea gilipoya y por fabor esplica que mierda no entiendés'
+    if text in triggers:
+        return 'Por favor, explica qué es lo que no entiendes'
 
 
     else:
