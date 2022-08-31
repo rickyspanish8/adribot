@@ -23,11 +23,11 @@ def custom_command(update, context):
     update.message.reply_text('This is a custom command, you can add whatever text you want here.')
 
 
-def handle_response(text) -> str:
-    # Create your own response logic
+def handle_response(text, username) -> str:
+        # Create your own response logic
 
     if text in triggers:
-        return 'Por favor, explica qué es lo que no entiendes'
+        return username + ' Por favor, explica qué es lo que no entiendes' 
 
 
     else:
@@ -39,6 +39,7 @@ def handle_message(update, context):
     message_type = update.message.chat.type
     text = str(update.message.text).lower()
     response = ''
+    username = update.message.from_user.first_name
 
     # Print a log for debugging
     print(f'User ({update.message.chat.id}) says: "{text}" in: {message_type}')
@@ -48,9 +49,9 @@ def handle_message(update, context):
         # Replace with your bot username
         if '@bot19292bot' in text:
             new_text = text.replace('@bot19292bot', '').strip()
-            response = handle_response(new_text)
+            response = handle_response(new_text , username)
     else:
-        response = handle_response(text)
+        response = handle_response(text , username)
 
     # Reply normal if the message is in private
     update.message.reply_text(response)
